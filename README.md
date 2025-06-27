@@ -28,20 +28,6 @@ Está siendo desarrollado como una oportunidad de investigación personal, integ
 
 ---
 
-## 🗃 Estructura de carpetas
 
-├── backend/ # Código fuente Python (API, ETL, modelos)
-│ ├── api/ # Endpoints y lógica de negocio (FastAPI)
-│ ├── etl/ # Scrapers, parsers, cargadores de datos
-│ ├── models/ # Definiciones SQLAlchemy / Pydantic
-│ └── tests/ # Pruebas unitarias
-├── data/ # Archivos locales (nunca versionar datos sensibles)
-│ ├── raw/ # PDFs, CSVs, XBRL originales descargados
-│ └── processed/ # Archivos intermedios (Parquet, JSON limpio)
-├── notebooks/ # Análisis exploratorios en Jupyter
-├── frontend/ # Código Angular, Dash o Streamlit (a definir)
-├── docker-compose.yaml # Infraestructura local (PostgreSQL, Jupyter)
-├── environment.yaml # Entorno Conda reproducible
-├── .gitignore # Archivos ignorados por Git
 └── README.md # Este archivo
 
