@@ -1,0 +1,2 @@
+# trendear
+Screener con automatización
