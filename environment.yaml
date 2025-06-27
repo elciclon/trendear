@@ -1,0 +1,25 @@
+name: screener-env
+channels:
+    - conda-forge
+    - defaults
+
+dependencies:
+    - python=3.11
+    - pip
+    - pandas
+    - sqlalchemy
+    - psycopg2-binary
+    - jupyterlab
+    - notebook
+    - ipykernel
+    - fastapi
+    - uvicorn
+    - matplotlib
+    - numpy
+    - requests
+
+    # librerías que se instalarán desde pip
+    - pip:
+          - yfinance
+          - openpyxl
+          - pydantic

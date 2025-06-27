@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: timescale/timescaledb:2.13.1-pg16
+    container_name: screener-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: screener
+      POSTGRES_PASSWORD: screener123
+      POSTGRES_DB: screener_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U screener"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

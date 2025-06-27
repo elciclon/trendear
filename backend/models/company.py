@@ -1,7 +1,9 @@
 from sqlalchemy import Column, String, Integer, Date
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
+
 
 class Company(Base):
     __tablename__ = "companies"
@@ -15,3 +17,4 @@ class Company(Base):
     sector = Column(String)
     industry = Column(String)
     listing_date = Column(Date)
+    earnings = relationship("Earnings", back_populates="company", cascade="all, delete")
