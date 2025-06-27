@@ -45,7 +45,7 @@ Designed as both a professional-grade tool and a didactic project in the context
 
 ## 🧱 Architecture
 
--   **Backend:** Python 3.12, PostgreSQL 16 + TimescaleDB
+-   **Backend:** Python 3.11, PostgreSQL 16 + TimescaleDB
 -   **ETL:** Pandas, SQLAlchemy, (custom scrapers per data source)
 -   **KPIs:** Calculated from raw financial data using SQL and Python
 -   **Front-end:** In development (Angular or Dash)
