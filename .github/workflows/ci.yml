@@ -1,52 +1,53 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
+    tests:
+        runs-on: ubuntu-latest
 
-    steps:
-      # 1️⃣  Chequea el código del repo
-      - name: Checkout repo
-        uses: actions/checkout@v4
+        steps:
+            # 1️⃣  repo checkout
+            - name: Checkout repo
+              uses: actions/checkout@v4
 
-      # 2️⃣  Configura Miniconda y crea el entorno screener-env
-      - name: Set up Conda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          miniforge-variant: Mambaforge          # mamba = mucho más rápido
-          activate-environment: screener-env
-          environment-file: environment.yaml
-          auto-update-conda: true
-          use-mamba: true
+            # 2️⃣  configure miniconda
+            - name: Set up Conda
+              uses: conda-incubator/setup-miniconda@v3
+              with:
+                  miniforge-variant: Miniforge3 # Miniforge3 is recommended for better compatibility
+                  activate-environment: screener-env
+                  environment-file: environment.yaml
+                  auto-update-conda: true
+                  use-mamba: true
 
-      # 3️⃣  Caché de la carpeta pkgs de conda
-      - name: Cache Conda
-        uses: actions/cache@v4
-        with:
-          path: ~/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ hashFiles('environment.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-conda-
+            # 3️⃣  conda cache
+            # Cache Conda packages to speed up subsequent runs
+            - name: Cache Conda
+              uses: actions/cache@v4
+              with:
+                  path: ~/conda_pkgs_dir
+                  key: ${{ runner.os }}-conda-${{ hashFiles('environment.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-conda-
 
-      # 4️⃣  Ejecuta tests + cobertura
-      - name: Run tests with coverage
-        shell: bash -l {0}              # importante: -l para activar el entorno
-        run: |
-          pytest -q \
-            --cov=app \
-            --cov-report=xml \
-            --cov-report=term \
-            --cov-fail-under=95
+            # 4️⃣  run tests with coverage
+            - name: Run tests with coverage
+              shell: bash -l {0} # -l to load conda environment
+              run: |
+                  pytest -q \
+                    --cov=app \
+                    --cov-report=xml \
+                    --cov-report=term \
+                    --cov-fail-under=95
 
-      # 5️⃣  Sube coverage.xml como artefacto
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-xml
-          path: coverage.xml
+            # 5️⃣  upload coverage report
+            - name: Upload coverage report
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-xml
+                  path: coverage.xml
