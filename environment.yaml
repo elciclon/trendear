@@ -5,6 +5,8 @@ channels:
 
 dependencies:
     - python=3.11
+    - pytest
+    - pytest-cov
     - pip
     - pandas
     - sqlalchemy
