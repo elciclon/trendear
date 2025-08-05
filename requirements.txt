@@ -3,3 +3,4 @@ pandas==2.3.0
 SQLAlchemy==2.0.41
 streamlit==1.46.1
 yfinance==0.2.64
+django>=4.2
